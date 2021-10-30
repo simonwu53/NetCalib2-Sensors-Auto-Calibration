@@ -15,6 +15,7 @@ python train.py \
 --loss_a 1.25 \
 --loss_b 1.75 \
 --loss_c 1.0 \
---exp_name HOPE-10-0.2 \
---ckpt /home/username/OneDriveUT/projects/autocalibration_project/results/HOPE-10-0.2/ckpt/Epoch65_val_0.2983.tar \
---ckpt_no_lr
+
+# --exp_name HOPE-10-0.2 \
+# --ckpt /home/username/OneDriveUT/projects/autocalibration_project/results/HOPE-10-0.2/ckpt/Epoch65_val_0.2983.tar \
+# --ckpt_no_lr
