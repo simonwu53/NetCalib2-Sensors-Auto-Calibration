@@ -45,7 +45,7 @@ Version of packages may not necessarily fully match the numbers below.
 | tqdm | 4.46.0 |
 | Pillow | 7.1.2 |
 
-For a full list of all dependencies, please visit [here](https://github.com/simonwu53/NetCalib2-Sensors-Auto-Calibration/blob/master/requirements.txt).
+For a full list of all dependencies, please visit [here](https://github.com/simonwu53/NetCalib2-Sensors-Auto-Calibration/blob/main/requirements.txt).
 
 1. Clone the repo to your local drive. 
 2. Setup your own Python environment and install necessary dependencies (using a virtual environment is recommended).
@@ -56,15 +56,15 @@ In general, the inputs for the model are a pair of a LiDAR projected depth map a
 [KITTI raw dataset](http://www.cvlibs.net/datasets/kitti/raw_data.php) from the date `26_09` is used and preprocessed before training. 
 Drive `0005` and `0070` are split out for testing. 
 Drive `0013`, `0020`, and `0079` are split out for validation.
+The rest drives are used for training. 
 
-For the rest Drives from the `26_09` KITTI raw dataset, 
-depth map is calculated from stereo color images, 
-and LiDAR depth map is also calculated with an artificial error.
+For all drives, depth map (located in `image_c` folder) is calculated from stereo color images, 
+and LiDAR depth map (located in `image_l` folder) is also calculated with an artificial error.  
 
-The artificial errors are recorded for each drive in the following format,
-* filename: `gt.txt`
-* attributes: img_filename, roll err, pitch err, yaw err, x err, y err, z err
+The artificial errors are recorded (in `gt.txt` file) for each drive in the following format,
+* img_filename, roll err, pitch err, yaw err, x err, y err, z err
 
+Example for `gt.txt`:
 ```text
 0000000000.png,0.14150073,0.059256576,0.011725272,0.16007939,-0.18555182,0.04104398
 ...
@@ -114,10 +114,10 @@ The structure of the dataset should be organized like this:
             └── calib_velo_to_cam.txt
 ```
 
-In `dataset_preprocessing/` folder, there's a utility script ([download.sh](https://github.com/simonwu53/NetCalib2-Sensors-Auto-Calibration/blob/master/dataset_preprocessing/download.sh)) for downloading KITTI dataset. 
+In `dataset_preprocessing/` folder, there's a utility script ([download.sh](https://github.com/simonwu53/NetCalib2-Sensors-Auto-Calibration/blob/main/dataset_preprocessing/download.sh), run at the folder you want to download) for downloading KITTI dataset. 
 After downloading, the dataset should be reorganized as shown above.
-There is another script ([preprocess.sh](https://github.com/simonwu53/NetCalib2-Sensors-Auto-Calibration/blob/master/dataset_preprocessing/preprocess.sh)) for generating both LiDAR depth maps and camera depth maps, but need a little modification. 
-You need to add your selected algorithm for camera depth in [preprocess.py](https://github.com/simonwu53/NetCalib2-Sensors-Auto-Calibration/blob/master/dataset_preprocessing/preprocess.py) in order to run the script. 
+There is another script ([preprocess.sh](https://github.com/simonwu53/NetCalib2-Sensors-Auto-Calibration/blob/main/dataset_preprocessing/preprocess.sh)) for generating both LiDAR depth maps and camera depth maps, but need a little modification. 
+You need to add your selected algorithm for camera depth in [preprocess.py](https://github.com/simonwu53/NetCalib2-Sensors-Auto-Calibration/blob/main/dataset_preprocessing/preprocess.py) in order to run the script. 
 
 ### 3. Train the model
 Modify the configurations in `src/train.sh` and read the available parameters from `src/train.py`. 
@@ -140,7 +140,7 @@ python eval.py --ckpt path/to/ckpt.tar --visualization --rotation_offsest 10 --t
 * `--rotation_offsest` and `--translation_offsest` used during the training process are required to correctly recognize the output from the model.
 
 ## Licence 
-NetCalib is released under a [MIT License](https://github.com/simonwu53/NetCalib2-Sensors-Auto-Calibration/blob/master/LICENSE) license. 
+NetCalib is released under a [MIT License](https://github.com/simonwu53/NetCalib2-Sensors-Auto-Calibration/blob/main/LICENSE) license. 
 
 For a closed-source version of NetCalib for commercial purposes, please contact the authors: [Wu](mailto:Shan.Wu@ut.ee) and [Hadachi](mailto:hadachi@ut.ee)
 
