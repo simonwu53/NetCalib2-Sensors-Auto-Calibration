@@ -151,7 +151,7 @@ Shan Wu; Amnir Hadachi; Damien Vivet; Yadu Prabhakar.
 ## Citation 
 If you use NetCalib in an academic work, please cite:
 ```
-@article{plangi2018real,
+@article{wu2021this,
   title={This is The Way: Sensors Auto-calibration Approach Based on Deep Learning for Self-driving Cars},
   author={Shan, Wu; Hadachi, Amnir; Vivet, Damien; Prabhakar, Yadu},
   journal={IEEE Sensors Journal},
