@@ -155,9 +155,6 @@ If you use NetCalib in an academic work, please cite:
   title={This is The Way: Sensors Auto-calibration Approach Based on Deep Learning for Self-driving Cars},
   author={Shan, Wu; Hadachi, Amnir; Vivet, Damien; Prabhakar, Yadu},
   journal={IEEE Sensors Journal},
-  volume={},
-  number={},
-  pages={},
   year={2021},
   publisher={IEEE}
 }
