@@ -160,6 +160,6 @@ If you use NetCalib in an academic work, please cite:
 }
 ```
 
-Preprint version of the paper is [here](https://www.researchgate.net/publication/344694742_NetCalib_A_Novel_Approach_for_LiDAR-Camera_Auto-calibration_Based_on_Deep_Learning).
+Published paper is [here](https://ieeexplore.ieee.org/document/9599702).
 
 
