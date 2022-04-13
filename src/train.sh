@@ -1,7 +1,10 @@
 #!/usr/bin/env bash
 
+# use KITTI root directory here as mentioned in the dataset section of README
+# https://github.com/simonwu53/NetCalib2-Sensors-Auto-Calibration#2-dataset
 KITTI_DIR="/home/username/dataset/KITTI/"
 
+# activate virtual env if needed
 source /home/username/Projects/venvs/pytorch/bin/activate
 
 python train.py \
@@ -16,6 +19,7 @@ python train.py \
 --loss_b 1.75 \
 --loss_c 1.0 \
 
-# --exp_name HOPE-10-0.2 \
-# --ckpt /home/username/OneDriveUT/projects/autocalibration_project/results/HOPE-10-0.2/ckpt/Epoch65_val_0.2983.tar \
+# args for resuming (optional)
+# --exp_name exp_dir \
+# --ckpt /home/username/projects/NetCalib2-Sensors-Auto-Calibration/results/exp_dir/ckpt/Epoch00_val_0.0.tar \
 # --ckpt_no_lr

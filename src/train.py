@@ -184,7 +184,7 @@ def validation(model: Module, loss_fn: Loss, loader: DataLoader,
 
 def arg_parser():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--dataset', type=str, default='/home/username/dataset/KITTI/', help='Model learning rate.')
+    parser.add_argument('--dataset', type=str, default='/home/username/dataset/KITTI/', help='KITTI dataset root directory.')
     parser.add_argument('--batch', type=int, default=2, help='Batch size.')
     parser.add_argument('--ckpt', type=str, help='Path to the saved model in saved folder.')
     parser.add_argument('--ckpt_no_lr', action='store_true', help='Ignore lr in the checkpoint.')
@@ -221,7 +221,7 @@ if __name__ == '__main__':
     log_dir = result_base.joinpath('log')
     ckpt_dir = result_base.joinpath('ckpt')
     mod_dir = result_base.joinpath('mod')
-    result_base.mkdir(exist_ok=True)
+    result_base.mkdir(exist_ok=True, parents=True)
     log_dir.mkdir(exist_ok=True)
     ckpt_dir.mkdir(exist_ok=True)
     mod_dir.mkdir(exist_ok=True)
