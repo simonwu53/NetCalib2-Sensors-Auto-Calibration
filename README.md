@@ -114,9 +114,11 @@ The structure of the dataset should be organized like this:
             └── calib_velo_to_cam.txt
 ```
 
-In `dataset_preprocessing/` folder, there's a utility script ([download.sh](https://github.com/simonwu53/NetCalib2-Sensors-Auto-Calibration/blob/main/dataset_preprocessing/download.sh), run at the folder you want to download) for downloading KITTI dataset. 
-After downloading, the dataset should be reorganized as shown above.
-There is another script ([preprocess.sh](https://github.com/simonwu53/NetCalib2-Sensors-Auto-Calibration/blob/main/dataset_preprocessing/preprocess.sh)) for generating both LiDAR depth maps and camera depth maps, but need a little modification. 
+In `dataset_preprocessing/` folder, there's a utility script ([download.sh](https://github.com/simonwu53/NetCalib2-Sensors-Auto-Calibration/blob/main/dataset_preprocessing/download.sh), run at the folder you want to download) for downloading KITTI dataset 
+***(Note: the script may not work as intended now).***
+After downloading and unarchiving, the dataset should be reorganized as shown above.
+
+There is another script ([preprocess.sh](https://github.com/simonwu53/NetCalib2-Sensors-Auto-Calibration/blob/main/dataset_preprocessing/preprocess.sh)) for generating both LiDAR depth maps and camera depth maps, but need ***a little modification***. 
 You need to add your selected algorithm for camera depth in [preprocess.py](https://github.com/simonwu53/NetCalib2-Sensors-Auto-Calibration/blob/main/dataset_preprocessing/preprocess.py) in order to run the script. 
 
 ### 3. Train the model

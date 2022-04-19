@@ -3,11 +3,11 @@ import random
 import cv2
 import numpy as np
 from numpy.random import default_rng
-from typing import Tuple, Literal, Dict, Union, Optional, List
+from typing import Tuple, Literal, Dict, Union, Optional, List, Callable
 from pathlib import Path
 import pykitti
 import torch
-from torch import nn
+from torch import nn, Tensor
 from torch.utils.data import Dataset, DataLoader
 from torchvision.transforms import Normalize
 from tqdm import tqdm
@@ -268,9 +268,9 @@ def preprocess_depth_data(dataset: KITTIDataset, method_for_cam_depth: Optional,
         image_c_path = drive_path.joinpath('image_c')
         image_l_path = drive_path.joinpath('image_l')
 
-        # if image_c_path.exists() and image_l_path.exists():
-        #     print(f'Drive {drive} seems already processed. Skip.')
-        #     continue
+        if image_c_path.exists() and image_l_path.exists():
+            print(f'Drive {drive} seems already processed. Skip.')
+            continue
         if len(dataset.current_kitti_loader.cam2_files) != len(dataset.current_kitti_loader.velo_files):
             print(f'Drive {drive} has mismatch cam2 files and velo files! Fixing...')
             kitti_loader = dataset.current_kitti_loader
@@ -343,7 +343,7 @@ def play_sequence(data: np.ndarray, win_size: Tuple[int] = (1250, 400), rate: in
 
 
 def arg_parser():
-    parser = argparse.ArgumentParser(description='BTS PyTorch implementation.')
+    parser = argparse.ArgumentParser(description='Script for KITTI dataset pre-processing.')
     parser.add_argument('--data_path', type=str, help='path to the data', required=True)
     parser.add_argument('--n_workers', type=int, help='number of workers for data loader', default=6)
     parser.add_argument('--split', type=str, choices=['train', 'val', 'test'], help='train test val split', default='train')
@@ -359,11 +359,24 @@ if __name__ == '__main__':
     print(args)
 
     # initialize methods for camera depth here
+    func_for_cam_depth: Optional[Callable[[Tensor, Tensor], Tensor]] = None
     if not args.no_cam_depth:
+        # ------------
+        # TODO: if you want to generate camera depth maps, implement here
+        # This function will be called at line #312.
+        # Inputs are tensors, you can convert it back to numpy array if your algorithm don't use tensors
+        #
+        # typing: Callable[[Tensor, Tensor], Tensor]
+        # input : img2, Tensor, left color image from KITTI dataset, loaded by PyTorch DataLoader
+        #         img3, Tensor, right color image from KITTI dataset, loaded by PyTorch DataLoader
+        # output: depth_c, Tensor, camera depth map, value range [0, 1]
+        # ------------
+        # func_for_cam_depth: Callable = SomeMethodOfYourChoice()
         ...
-        method_for_cam_depth = None
-    else:
-        method_for_cam_depth = None
+        assert func_for_cam_depth is not None, \
+            'You need to add your algorithm above for generating camera depth maps. ' \
+            'It can be as simple as a Semi-Global Block Matching (SGBM) algorithm or' \
+            'a much complicated neural network based algorithm.'
 
     # load dataset
     dataset = KITTIDataset(mode=args.split)
@@ -371,4 +384,4 @@ if __name__ == '__main__':
 
     # tasks
     dataset.merge_drives = False
-    preprocess_depth_data(dataset, method_for_cam_depth, args.rotation_offset, args.translation_offset)
+    preprocess_depth_data(dataset, func_for_cam_depth, args.rotation_offset, args.translation_offset)
