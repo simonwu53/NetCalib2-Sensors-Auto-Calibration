@@ -121,6 +121,8 @@ After downloading and unarchiving, the dataset should be reorganized as shown ab
 There is another script ([preprocess.sh](https://github.com/simonwu53/NetCalib2-Sensors-Auto-Calibration/blob/main/dataset_preprocessing/preprocess.sh)) for generating both LiDAR depth maps and camera depth maps, but need ***a little modification***. 
 You need to add your selected algorithm for camera depth in [preprocess.py](https://github.com/simonwu53/NetCalib2-Sensors-Auto-Calibration/blob/main/dataset_preprocessing/preprocess.py) in order to run the script. 
 
+Note that the preprocessed camera depth images and projected LiDAR depth images should be cropped into the shape of **(352, 1216)** for height and width (dim 0 & 1) respectively.
+
 ### 3. Train the model
 Modify the configurations in `src/train.sh` and read the available parameters from `src/train.py`. 
 Run the training process is as simple as run the following command after configured the parameters.

@@ -108,6 +108,10 @@ def train_one_epoch(model: Module, loss_fn: Loss, opt: Optimizer, loader: DataLo
         cam2_d, velo_d, gt_err, gt_err_norm, velo, T = sample[0].cuda(), sample[1].cuda(), sample[2], \
                                                        sample[3].cuda(), sample[4].cuda(), sample[5].cuda()
 
+        assert cam2_d.shape[-2:] == velo_d.shape[-2:], f'model input shape mismatch. ' \
+                                                       f'Input 1 shape: {cam2_d.shape[-2:]}. ' \
+                                                       f'Input 2 shape: {velo_d.shape[-2:]}'
+
         # forward
         pred_r, pred_t = model(velo_d, cam2_d)
         loss = loss_fn((pred_r, pred_t), torch.split(gt_err_norm, 3, dim=1), velo, T)
