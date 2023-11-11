@@ -2,6 +2,10 @@
 
 This work is accepted for publication in IEEE Sensors Journal.
 
+<a href="https://zenodo.org/doi/10.5281/zenodo.10114486"><img src="https://zenodo.org/badge/422854659.svg" alt="DOI"></a>
+<a href="https://doi.org/10.1109/JSEN.2021.3124788"><img src="http://img.shields.io/badge/DOI-10.1109/JSEN.2021.3124788-006699.svg" alt="DOI"></a>
+
+
 <img src="assets/pipeline.png" width="1600" alt="pipeline-figure">
 
 In addition to the [original deep neural network architecture](https://github.com/simonwu53/NetCalib-Lidar-Camera-Auto-calibration), we added different losses to constrain the convergence of the model. Also, the preprocessing of dataset is required for fast training and convergence.
